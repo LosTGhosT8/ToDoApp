@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import { Outlet, useNavigate, Link } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <nav className="bg-gray-100 p-4 shadow flex justify-between">
+          <Link
+            to="/"
+            className="text-xl font-semibold text-blue-600 hover:text-blue-800 transition"
+          >
+            ToDo App
+          </Link>
+          <button
+            onClick={() => navigate("/api-todo/1")}
+            className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition"
+          >
+            View task #1
+          </button>
+        </nav>
+        <Outlet />
+      </div>
+    </>
   );
 }
 
