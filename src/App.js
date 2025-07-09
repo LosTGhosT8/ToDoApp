@@ -1,29 +1,22 @@
 import "./App.css";
 import React from "react";
-import { Outlet, useNavigate, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 function App() {
-  const navigate = useNavigate();
   return (
-    <>
-      <div>
-        <nav className="bg-gray-100 p-4 shadow flex justify-between">
-          <Link
-            to="/"
-            className="text-xl font-semibold text-blue-600 hover:text-blue-800 transition"
-          >
-            ToDo App
-          </Link>
-          <button
-            onClick={() => navigate("/api-todo/1")}
-            className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition"
-          >
-            View task #1
-          </button>
-        </nav>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <nav className="bg-white shadow-lg p-6 flex justify-between items-center animate-slideDown">
+        <Link
+          to="/"
+          className="text-2xl font-extrabold text-primary hover:text-secondary transition-colors duration-300 animate-wiggle"
+        >
+          ToDo App
+        </Link>
+      </nav>
+      <main className="p-8 animate-fadeIn">
         <Outlet />
-      </div>
-    </>
+      </main>
+    </div>
   );
 }
 

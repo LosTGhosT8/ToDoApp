@@ -12,50 +12,89 @@ const TodoItem = ({ task, toggleComplete, deleteTask }) => {
 
   return (
     <motion.li
-      initial={{ x: -20, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 20, opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`flex items-center justify-between p-4 rounded-xl transition-shadow mb-2 ${
-        task.completed
-          ? "bg-gray-100 hover:bg-gray-200"
-          : "bg-white hover:shadow-lg"
-      }`}
+      layout
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.8, opacity: 0 }}
+      whileHover={{ scale: 1.02, boxShadow: "0 20px 30px rgba(0,0,0,0.1)" }}
+      transition={{ duration: 0.4 }}
+      className="
+        flex items-center justify-between
+        bg-white
+        p-5
+        rounded-2xl
+        shadow-2xl
+        border-t-4 border-accent
+        transition-shadow
+      "
     >
-      <div className="flex items-center gap-3">
-        <input
+      {/* Checkbox + Title */}
+      <div className="flex items-center space-x-4">
+        <motion.input
           type="checkbox"
           checked={task.completed}
           onChange={() => toggleComplete(task.id)}
-          className="h-5 w-5 text-blue-600 focus:ring-blue-400 border-gray-300 rounded"
+          whileTap={{ scale: 1.2 }}
+          className="
+            h-6 w-6
+            text-primary
+            border-gray-300
+            rounded
+            focus:outline-none focus:ring-2 focus:ring-accent
+            transition-transform
+          "
         />
-        <span
-          className={`ml-2 font-medium transition-colors ${
-            task.completed ? "line-through text-gray-400" : "text-gray-800"
-          }`}
-        >
-          {task.title}{" "}
-          <span className="text-sm text-gray-500">({task.category})</span>
-        </span>
+        <div>
+          <p
+            className={`
+              font-medium text-lg
+              transition-colors
+              ${task.completed ? "line-through text-gray-400" : "text-gray-800"}
+            `}
+          >
+            {task.title}
+          </p>
+          <p className="text-sm text-gray-500">{task.category}</p>
+        </div>
       </div>
 
-      <div className="flex items-center gap-2">
-        <button
+      {/* Actions */}
+      <div className="flex items-center space-x-3">
+        <motion.button
           onClick={handleDetails}
-          className="text-sm bg-blue-500 text-black px-3 py-1 rounded hover:bg-blue-600 transition"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          className="
+            px-4 py-2
+            bg-primary text-white font-medium
+            rounded-lg shadow
+            hover:bg-primary-dark
+            focus:outline-none focus:ring-2 focus:ring-accent
+            transition
+          "
         >
           Detalji
-        </button>
+        </motion.button>
         {!task.isApi && (
-          <button
+          <motion.button
             onClick={() => deleteTask(task.id)}
-            className="text-red-500 hover:text-red-700 transition-colors"
+            whileHover={{ x: 2 }}
+            whileTap={{ scale: 0.9 }}
+            className="
+              px-3 py-1
+              text-red-500 font-medium
+              rounded-lg
+              hover:bg-red-50
+              focus:outline-none focus:ring-2 focus:ring-red-300
+              transition-colors
+            "
           >
             Obriši
-          </button>
+          </motion.button>
         )}
       </div>
     </motion.li>
   );
 };
+
 export default TodoItem;

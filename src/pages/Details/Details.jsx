@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -24,22 +23,28 @@ const Details = () => {
   }, [id, localTask]);
 
   if (loading) {
-    return <p className="p-6 text-center text-gray-500">Učitavanje...</p>;
+    return (
+      <p className="p-6 text-center text-gray-500 animate-pulse">
+        Učitavanje...
+      </p>
+    );
   }
   if (!task) {
     return (
-      <p className="p-6 text-center text-red-500">Zadatak nije pronađen.</p>
+      <p className="p-6 text-center text-red-500 animate-fadeIn">
+        Zadatak nije pronađen.
+      </p>
     );
   }
 
   return (
     <motion.div
-      className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg"
+      className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-2xl border-t-4 border-accent animate-fadeIn"
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      <h2 className="text-2xl font-bold mb-4">Detalji zadatka</h2>
+      <h2 className="text-3xl font-bold mb-4 text-primary">Detalji zadatka</h2>
       <p className="mb-2">
         <strong>ID:</strong> {task.id}
       </p>
@@ -51,7 +56,7 @@ const Details = () => {
       </p>
       <button
         onClick={() => navigate(-1)}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+        className="bg-secondary text-white px-6 py-2 rounded-lg hover:bg-primary transition-colors duration-300 transform hover:scale-105"
       >
         Natrag
       </button>
