@@ -12,7 +12,7 @@ const Details = () => {
 
   useEffect(() => {
     if (!localTask) {
-      fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      fetch(`http://localhost:5000/todos/${id}`)
         .then((res) => res.json())
         .then((data) => {
           setTask(data);

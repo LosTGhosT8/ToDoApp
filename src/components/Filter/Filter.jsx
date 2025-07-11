@@ -22,7 +22,6 @@ const Filter = ({ selected, onSelect }) => {
         className="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent transition duration-200"
       >
         <option>All</option>
-        <option>API</option>
         <option>Posao</option>
         <option>Osobno</option>
         <option>Obitelj</option>

@@ -1,0 +1,28 @@
+{
+  "todos": [
+    {
+      "id": "7d5e",
+      "title": "Napravi projekt",
+      "completed": false,
+      "category": "Posao"
+    },
+    {
+      "id": "25b6",
+      "title": "Programiraj do kraja mehanike",
+      "completed": false,
+      "category": "Posao"
+    },
+    {
+      "id": "84e8",
+      "title": "Napravi ručak",
+      "completed": false,
+      "category": "Osobno"
+    },
+    {
+      "id": "a56c",
+      "title": "Pokupi djecu",
+      "completed": false,
+      "category": "Obitelj"
+    }
+  ]
+}
