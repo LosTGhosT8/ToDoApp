@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TodoForm from "../TodoForm/TodoForm";
 import Filter from "../Filter/Filter";
 import TodoList from "../TodoList/TodoList";
 
 import {
-  getTasks,
   createTask,
   updateTask,
   deleteTask as removeTask
 } from "../../services/todosApi";
 
-const Home = () => {
-  const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState("All");
-  const [loading, setLoading] = useState(true);
+import { useTasks } from "../../hooks/useTasks";
 
-  useEffect(() => {
-    getTasks()
-      .then(setTasks)
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
+const Home = () => {
+  const { tasks, setTasks, loading, error } = useTasks();
+  const [filter, setFilter] = useState("All");
 
   const addTask = (title, category) => {
     createTask({ title, category })
@@ -52,6 +45,14 @@ const Home = () => {
         <p className="text-gray-500 text-lg animate-pulse">
           Učitavanje zadataka...
         </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-500 text-center mt-10">
+        Greška pri učitavanju zadataka:{error.message}
       </div>
     );
   }
