@@ -23,6 +23,24 @@
       "title": "Pokupi djecu",
       "completed": false,
       "category": "Obitelj"
+    },
+    {
+      "id": "db97",
+      "title": "Testiraj aplikaciju",
+      "completed": false,
+      "category": "Posao"
+    },
+    {
+      "id": "96af",
+      "title": "Kupi narminice",
+      "completed": false,
+      "category": "Osobno"
+    },
+    {
+      "id": "62a8",
+      "title": "Odvezi djecu u školu",
+      "completed": false,
+      "category": "Obitelj"
     }
   ]
 }

@@ -4,7 +4,12 @@ import TodoForm from "../TodoForm/TodoForm";
 import Filter from "../Filter/Filter";
 import TodoList from "../TodoList/TodoList";
 
-const API_URL = "http://localhost:5000/todos";
+import {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask as removeTask
+} from "../../services/todosApi";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -12,55 +17,30 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => setTasks(data))
+    getTasks()
+      .then(setTasks)
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
 
   const addTask = (title, category) => {
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ title, completed: false, category })
-    })
-      .then((res) => res.json())
-      .then((newTask) => {
-        setTasks((prev) => [...prev, newTask]);
-      })
+    createTask({ title, category })
+      .then((newTask) => setTasks((prev) => [...prev, newTask]))
       .catch(console.error);
   };
 
   const toggleComplete = (id) => {
-    const task = tasks.find((t) => t.id === id);
-    fetch(`${API_URL}/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ completed: !task.completed })
-    })
-      .then((res) => res.json())
-      .then((updated) => {
-        setTasks((prev) => prev.map((t) => (t.id === id ? updated : t)));
-      })
+    const current = tasks.find((t) => t.id === id);
+    updateTask(id, { completed: !current.completed })
+      .then((updatedTask) =>
+        setTasks((prev) => prev.map((t) => (t.id === id ? updatedTask : t)))
+      )
       .catch(console.error);
   };
 
   const deleteTask = (id) => {
-    fetch(`${API_URL}/${id}`, {
-      method: "DELETE"
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to delete task");
-        return res.json();
-      })
-      .then(() => {
-        setTasks((prev) => prev.filter((t) => t.id !== id));
-      })
+    removeTask(id)
+      .then(() => setTasks((prev) => prev.filter((t) => t.id !== id)))
       .catch(console.error);
   };
 

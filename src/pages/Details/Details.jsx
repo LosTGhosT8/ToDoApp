@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { getTask } from "../../services/todosApi";
 
 const Details = () => {
   const { id } = useParams();
@@ -12,13 +13,10 @@ const Details = () => {
 
   useEffect(() => {
     if (!localTask) {
-      fetch(`http://localhost:5000/todos/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setTask(data);
-          setLoading(false);
-        })
-        .catch(console.error);
+      getTask(id)
+        .then((data) => setTask(data))
+        .catch(console.error)
+        .finally(() => setLoading(false));
     }
   }, [id, localTask]);
 
